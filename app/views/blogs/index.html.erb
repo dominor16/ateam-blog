@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Mini Blogs</h1>
+
+<%= form_for @blog, action:'create' do |f| %>
+  <div class="field">
+    <%= f.text_field :body %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<% @blogs.each do |blog| %>
+  <br>
+  <%= blog.id %> :
+  <%= link_to blog.body, blog_path(blog) %>
+  <br>
+  <%= link_to 'いいね', "/blogs/#{blog.id}/good_count_up"  %>
+  <%= blog.like %>
+  |
+  コメント数:
+  <%= Reply.where(blog_id: blog.id).size %>
+  |
+  投稿日時:
+  <%= blog.created_at %>
+<% end %>
+<br>
