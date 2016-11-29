@@ -15,7 +15,8 @@
       </span>
       <br>
       <span class="like">
-        <%= link_to 'いいね', "/blogs/#{blog.id}/good_count_up"  %>
+        <!-- <%= link_to 'いいね', "/blogs/#{blog.id}/good_count_up"  %> -->
+        <%= link_to 'いいね',blog_path(blog.id),method: :post %>
         <%= blog.like %>
         |
       </span>

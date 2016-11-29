@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root 'blogs#index'
   resources :replies
   resources :blogs
-  get 'blogs/:id/good_count_up' => 'blogs#good_count_up'
+  post 'blogs/:id' => 'blogs#good_count_up' ,as:'like'
+
   # get 'blogs/', :on => :collection
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
