@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all.reverse
+    @blogs = Blog.order(:created_at).reverse
     @blog = Blog.new
   end
 
