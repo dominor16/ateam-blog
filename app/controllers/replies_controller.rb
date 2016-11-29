@@ -27,7 +27,7 @@ class RepliesController < ApplicationController
   def create
     @reply = Reply.new(reply_params)
     @reply.save
-    redirect_to blog_path(1)
+    redirect_to :back
 
     # respond_to do |format|
     #   if @reply.save

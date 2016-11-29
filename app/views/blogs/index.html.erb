@@ -1,28 +1,34 @@
 <p id="notice"><%= notice %></p>
-
-<h1>Mini Blogs</h1>
-
+<h1>Mini blog</h1>
 <%= form_for @blog, action:'create' do |f| %>
-  <div class="field">
-    <%= f.text_field :body %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.text_field :body, size: "80%",placeholder:"投稿しよう"%>
+  <%= f.submit value:"投稿する"%>
 <% end %>
-
-<% @blogs.each do |blog| %>
-  <br>
-  <%= blog.id %> :
-  <%= link_to blog.body, blog_path(blog) %>
-  <br>
-  <%= link_to 'いいね', "/blogs/#{blog.id}/good_count_up"  %>
-  <%= blog.like %>
-  |
-  コメント数:
-  <%= Reply.where(blog_id: blog.id).size %>
-  |
-  投稿日時:
-  <%= blog.created_at %>
-<% end %>
+<hr>
+<ul id="blogs">
+  <% @blogs.each do |blog| %>
+    <li class="blog">
+      <span><%= blog.id %></span>
+      :
+      <span class="body">
+        <%= link_to blog.body, blog_path(blog) %>
+      </span>
+      <br>
+      <span class="like">
+        <%= link_to 'いいね', "/blogs/#{blog.id}/good_count_up"  %>
+        <%= blog.like %>
+        |
+      </span>
+      <span class="comment">
+        コメント数:
+        <%= Reply.where(blog_id: blog.id).size %>
+        |
+      </span>
+      <span class="post-date">
+        投稿日時:
+        <%= blog.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+      </span>
+    </li>
+  <% end %>
+</ul>
 <br>

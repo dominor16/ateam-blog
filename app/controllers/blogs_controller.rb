@@ -4,14 +4,14 @@ class BlogsController < ApplicationController
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs = Blog.all
+    @blogs = Blog.all.reverse
     @blog = Blog.new
   end
 
   # GET /blogs/1
   # GET /blogs/1.json
   def show
-    @replies = Reply.where(blog_id: @blog.id)
+    @replies = Reply.where(blog_id: @blog.id).reverse
     @reply =  Reply.new
   end
 

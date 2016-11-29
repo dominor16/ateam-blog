@@ -1,43 +1,41 @@
 <p id="notice"><%= notice %></p>
 <h1>Mini blog</h1>
 <%= link_to '戻る', blogs_path %>
-
-<hr>
-
 <p>
-  <%= @blog.id %>
-  投稿日時:
-  <%= @blog.created_at %>
-  |
-  <%= link_to 'いいね', "/blogs/#{@blog.id}/good_count_up"  %>
-  <%= @blog.like %>
-  <br>
-  <strong>
-    <%= @blog.body %>
-  </strong>
-
+  <div class="blog-detail">
+    <span>
+      <%= @blog.id %>
+      :
+    </span>
+    投稿日時:
+    <%= @blog.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+    |
+    <%= link_to 'いいね', "/blogs/#{@blog.id}/good_count_up"  %>
+    <%= @blog.like %>
+    <br>
+    <strong>
+      <%= @blog.body %>
+    </strong>
+  </div>
 </p>
-<hr>
-
 
 <%= form_for @reply, action:'create' do |f| %>
-  <div class="field">
-    <%= f.label :comment %><br>
-    <%= f.text_field :comment %>
-    <%= f.hidden_field :blog_id, :value => @blog.id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.text_field :comment,size:'80%',placeholder:'コメントしよう' %>
+  <%= f.hidden_field :blog_id, :value => @blog.id %>
+  <%= f.submit value:"コメントする" %>
 <% end %>
+<hr>
 
-
-
-
-
-<% @replies.each do |reply| %>
-  <br>
-  <%= reply.comment %>
-  投稿日時:
-  <%= reply.created_at %>
-<% end %>
+<ol id="replies">
+  <% @replies.each do |reply| %>
+  <li class="reply">
+    <span class="comment">
+      <%= reply.comment %>
+    </span>
+    <span class="post-date">
+      投稿日時:
+      <%= reply.created_at.strftime('%Y/%m/%d %H:%M:%S')%>
+    </span>
+  </li>
+  <% end %>
+</ol>
